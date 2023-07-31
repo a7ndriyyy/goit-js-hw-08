@@ -8,7 +8,7 @@ const FORM_VALUE_KEY = 'feedback-form-state';
 
 getSaveFormState();
 
-form.addEventListener('input', throttle(onFormMessage, 500));
+form.addEventListener('input', throttle(getSaveFormState, 500));
 form.addEventListener('submit', onFormSubmit);
 
 function fillFormFromState() {
