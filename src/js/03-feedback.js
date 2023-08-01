@@ -37,6 +37,8 @@ function getSaveFormState() {
   const formData = {
     email: emailInput.value,
     message: textareaInput.value,
+    email: emailInput.value || "",
+    message: textareaInput.value |"",
   };
   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 }
