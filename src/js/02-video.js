@@ -12,5 +12,5 @@ function getCurrentTimeKey(timeKey){
 player.on('timeupdate', throttle(getCurrentTimeKey, 1000));
 
 const currentTimeValue =  localStorage.getItem(CURRENT_TIME_KEY);
-player.getCurrentTime(currentTimeValue || 0);
+player.setCurrentTime(currentTimeValue || 0);
 
