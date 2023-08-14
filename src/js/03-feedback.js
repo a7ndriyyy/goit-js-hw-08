@@ -30,11 +30,11 @@ form.addEventListener('submit', onPageReload);
      form.reset()
    }
    function getSaveFormState(e) {
-    formData[e.target.name]= e.target.value,
+    formData[e.target.name]= e.target.value
    };
 
    localStorage.setItem('feedback-form-state', JSON.stringify(formData));
-   }
+   
   function onPageLoad(){
     const dataFromLS= JSON.parse(localStorage.getItem('feedback-form-state'));
    if(dataFromLS) {
