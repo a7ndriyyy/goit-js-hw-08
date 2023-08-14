@@ -38,7 +38,8 @@ form.addEventListener('submit', onPageReload);
   function onPageLoad(){
     const dataFromLS= JSON.parse(localStorage.getItem('feedback-form-state'));
    if(dataFromLS) {
-     formData.email=emailInput.value=dataFromLS.email
-     formData.message=textareaInput.message=dataFromLS.message
+    formData = dataFromLS;
+    emailInput.value = formData.email;
+    textareaInput.value = formData.message;
    }
  }
