@@ -6,43 +6,39 @@ const textareaInput = document.querySelector('.feedback-form textarea');
 
 const FORM_VALUE_KEY = 'feedback-form-state';
 
-getSaveFormState();
+ onPageLoad();
+ 
+ const formData = {
+     email: "",
+     message: "",
+   };
 
 form.addEventListener('input', throttle(getSaveFormState, 500));
 form.addEventListener('submit', onPageReload);
 
-function onPageReload() {
-  const storedState = localStorage.getItem(' FORM_VALUE_KEY');
-  if (storedState) {
-     const formData = JSON.parse(storedState);
-  emailInput.value = formData.email || "";
-  textareaInput.value = formData.message || "";
-   }
-  }
-  onPageReload()
-  form.addEventListener('submit',(evt) => {
-    evt.preventDefault();
-    if(emailInput.value === "" || textareaInput.value === "")
-{return alert("fill all the fields")
-}
-    const formData = {
-      email: emailInput.value,
-      message: textareaInput.value,
-    };
+ function onPageReload() {
+   e.preventDefault()
     console.log(formData);
-    clearFormState();
-  });
-  function clearFormState() {
-    localStorage.removeItem('feedback-form-state');
-    emailInput.value = '';
-    textareaInput.value = '';
-  }
-function getSaveFormState() {
-  const formData = {
-    email: emailInput.value,
-    message: textareaInput.value,
-    email: emailInput.value || "",
-    message: textareaInput.value || "",
-  };
-  localStorage.setItem('feedback-form-state', JSON.stringify(formData));
-}
+     clearFormState();
+   }
+ function clearFormState() {
+     localStorage.removeItem('feedback-form-state');
+    formData = {
+     email: "",
+     message: "",
+   };
+     form.reset()
+   }
+   function getSaveFormState(e) {
+    formData[e.target.name]= e.target.value,
+   };
+
+   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+   }
+  function onPageLoad(){
+    const dataFromLS= JSON.parse(localStorage.getItem('feedback-form-state'));
+   if(dataFromLS) {
+     formData.email=emailInput.value=dataFromLS.email;
+     formData.message=emailInput.message=dataFromLS.message
+   }
+ }
