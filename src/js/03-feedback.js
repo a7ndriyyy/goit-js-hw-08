@@ -4,6 +4,8 @@ const form = document.querySelector('.feedback-form');
 const emailInput = document.querySelector('[name="email"]');
 const textareaInput = document.querySelector('[name="message"]');
 
+const FORM_VALUE_KEY = 'feedback-form-state';
+
  onPageLoad();
  
 form.addEventListener('input', throttle(getSaveFormState, 500));
