@@ -8,10 +8,16 @@ const FORM_VALUE_KEY = 'feedback-form-state';
 
  onPageLoad();
  
+//  const formData = {
+//   email: "",
+//   message: "",
+// };
+
+
 form.addEventListener('input', throttle(getSaveFormState, 500));
 form.addEventListener('submit', onPageReload);
 
- function onPageReload() {
+ function getSaveFormState() {
   let currentLocalStorage = localStorage.setItem(
     'feedback-form-state',
     JSON.stringify({ email: emailInput.value, message: textareaInput.value }),
@@ -19,7 +25,7 @@ form.addEventListener('submit', onPageReload);
   currentLocalStorage ? JSON.parse(localStorage.getItem('feedback-form-state')) : {};
 };
  
-   function getSaveFormState(evt) {
+   function onPageReload(evt) {
     evt.preventDefault();
   
     const formData = new FormData(form);
@@ -30,7 +36,7 @@ form.addEventListener('submit', onPageReload);
   };
    
   function onPageLoad(){
-    let currentLocalStorage = localStorage.getItem('feedback-form-state');
+    let currentLocalStorage = localStorage.getItem(FORM_VALUE_KEY);
   if (currentLocalStorage) {
     currentLocalStorage = JSON.parse(currentLocalStorage);
     Object.entries(currentLocalStorage).forEach(([name, value]) => {
