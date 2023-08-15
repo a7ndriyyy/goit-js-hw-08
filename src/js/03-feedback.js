@@ -1,45 +1,38 @@
 import throttle from 'lodash.throttle';
 
 const form = document.querySelector('.feedback-form');
-const emailInput = document.querySelector('.feedback-form input');
-const textareaInput = document.querySelector('.feedback-form textarea');
-
-const FORM_VALUE_KEY = 'feedback-form-state';
+const emailInput = document.querySelector('[name="email"]');
+const textareaInput = document.querySelector('[name="message"]');
 
  onPageLoad();
  
- const formData = {
-     email: "",
-     message: "",
-   };
-
 form.addEventListener('input', throttle(getSaveFormState, 500));
 form.addEventListener('submit', onPageReload);
 
  function onPageReload() {
-   e.preventDefault()
-    console.log(formData);
-     clearFormState();
-   }
- function clearFormState() {
-     localStorage.removeItem('feedback-form-state');
-    formData = {
-     email: "",
-     message: "",
-   };
-     form.reset()
-   }
-   function getSaveFormState(e) {
-    formData[e.target.name]= e.target.value
-   };
-
-   localStorage.setItem('feedback-form-state', JSON.stringify(formData));
+  let currentLocalStorage = localStorage.setItem(
+    'feedback-form-state',
+    JSON.stringify({ email: emailInput.value, message: textareaInput.value }),
+  );
+  currentLocalStorage ? JSON.parse(localStorage.getItem('feedback-form-state')) : {};
+};
+ 
+   function getSaveFormState(evt) {
+    evt.preventDefault();
+  
+    const formData = new FormData(form);
+    formData.forEach((value, name) => console.log(value, name));
+  
+    localStorage.removeItem('feedback-form-state');
+    evt.currentTarget.reset();
+  };
    
   function onPageLoad(){
-    const dataFromLS= JSON.parse(localStorage.getItem('feedback-form-state'));
-   if(dataFromLS) {
-    formData = dataFromLS;
-    emailInput.value = formData.email;
-    textareaInput.value = formData.message;
-   }
- }
+    let currentLocalStorage = localStorage.getItem('feedback-form-state');
+  if (currentLocalStorage) {
+    currentLocalStorage = JSON.parse(currentLocalStorage);
+    Object.entries(currentLocalStorage).forEach(([name, value]) => {
+      form.elements[name].value = value;
+    });
+  }
+};
