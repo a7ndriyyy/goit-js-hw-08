@@ -33,6 +33,9 @@ form.addEventListener('submit', onPageReload);
   
     localStorage.removeItem('feedback-form-state');
     evt.currentTarget.reset();
+    if(emailInput.value === "" || textareaInput.value === "")
+    {return alert("fill all the fields")
+    }
   };
    
   function onPageLoad(){
