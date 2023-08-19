@@ -27,15 +27,16 @@ form.addEventListener('submit', onPageReload);
  
    function onPageReload(evt) {
     evt.preventDefault();
-  
-    const formData = new FormData(form);
-    formData.forEach((value, name) => console.log(value, name));
-  
-    localStorage.removeItem('feedback-form-state');
-    evt.currentTarget.reset();
     if(emailInput.value === "" || textareaInput.value === "")
     {return alert("fill all the fields")
     }
+  
+    const formData = new FormData(form);
+    // formData.forEach((value, name) => console.log(value, name));
+    console.log(formData);
+  
+    localStorage.removeItem('feedback-form-state');
+    evt.currentTarget.reset();
   };
    
   function onPageLoad(){
