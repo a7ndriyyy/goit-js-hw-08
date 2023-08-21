@@ -8,11 +8,6 @@ const FORM_VALUE_KEY = 'feedback-form-state';
 
  onPageLoad();
  
-//  const formData = {
-//   email: "",
-//   message: "",
-// };
-
 
 form.addEventListener('input', throttle(getSaveFormState, 500));
 form.addEventListener('submit', onPageReload);
@@ -30,11 +25,10 @@ form.addEventListener('submit', onPageReload);
     if(emailInput.value === "" || textareaInput.value === "")
     {return alert("fill all the fields")
     }
-  
+
     const formData = new FormData(form);
-    // formData.forEach((value, name) => console.log(value, name));
-    console.log(formData);
-  
+    console.log(Object.fromEntries(formData));
+ 
     localStorage.removeItem('feedback-form-state');
     evt.currentTarget.reset();
   };
